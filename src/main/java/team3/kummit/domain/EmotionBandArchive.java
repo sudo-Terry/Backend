@@ -8,11 +8,10 @@ import lombok.*;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Builder
 @AllArgsConstructor
-public class EmotionBandLike {
-
+public class EmotionBandArchive {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "emotion_band_like_id")
+    @Column(name = "emotion_band_archive_id")
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -22,5 +21,4 @@ public class EmotionBandLike {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="emotion_band_id")
     private EmotionBand emotionBand;
-
 }
