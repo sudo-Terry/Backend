@@ -24,7 +24,7 @@ public class EmotionBand {
     private String creatorName; // 불필요한 조인 막기
     private String emotion;
     private String comment;
-    private LocalDateTime createTime;
+    private LocalDateTime endTime;
 
     private Integer likeCount;
     private Integer peopleCount;

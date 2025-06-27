@@ -29,6 +29,6 @@ public class Song {
     private String title;
     private String artist;
     private String albumImageLink;
-    private LocalDateTime createTime;
+    private String previewLink;
 
 }

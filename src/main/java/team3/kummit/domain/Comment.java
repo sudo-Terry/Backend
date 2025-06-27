@@ -25,8 +25,8 @@ public class Comment {
     @JoinColumn(name="member_id")
     private Member creator;
     private String creatorName;
-
     private String comment;
-    private LocalDateTime LocalDateTime;
+
+
 
 }
