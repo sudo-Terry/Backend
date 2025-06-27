@@ -1,9 +1,9 @@
 package team3.kummit.domain;
 
+import java.time.LocalDate;
+
 import jakarta.persistence.*;
 import lombok.*;
-
-import java.time.LocalDate;
 
 @Entity
 @Getter
