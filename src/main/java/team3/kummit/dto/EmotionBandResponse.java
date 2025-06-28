@@ -21,6 +21,7 @@ public class EmotionBandResponse {
     private Integer likeCount;
     private Integer peopleCount;
     private Integer songCount;
+    private Integer commentCount;
     private boolean isLiked;
 
     public static EmotionBandResponse from(EmotionBand emotionBand, boolean isLiked) {
@@ -33,6 +34,7 @@ public class EmotionBandResponse {
                 .likeCount(emotionBand.getLikeCount())
                 .peopleCount(emotionBand.getPeopleCount())
                 .songCount(emotionBand.getSongCount())
+                .commentCount(emotionBand.getCommentCount())
                 .isLiked(isLiked)
                 .build();
     }

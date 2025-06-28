@@ -37,6 +37,7 @@ public class EmotionBandLikeService {
                             .likeCount(band.getLikeCount() - 1)
                             .peopleCount(band.getPeopleCount())
                             .songCount(band.getSongCount())
+                            .commentCount(band.getCommentCount())
                             .build();
                     bandRepository.save(updatedBand);
                     return false;
@@ -56,6 +57,7 @@ public class EmotionBandLikeService {
                             .likeCount(band.getLikeCount() + 1)
                             .peopleCount(band.getPeopleCount())
                             .songCount(band.getSongCount())
+                            .commentCount(band.getCommentCount())
                             .build();
                     bandRepository.save(updatedBand);
                     return true;
