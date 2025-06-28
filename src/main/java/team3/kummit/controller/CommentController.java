@@ -1,6 +1,5 @@
 package team3.kummit.controller;
 
-
 import java.util.List;
 
 import org.springframework.http.ResponseEntity;
@@ -13,6 +12,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import team3.kummit.dto.CommentRequest;
 import team3.kummit.dto.CommentResponse;
@@ -37,7 +37,7 @@ public class CommentController {
     public ResponseEntity<CommentResponse> createComment(
             @Parameter(description = "감정밴드 ID") @PathVariable Long emotionBandId,
             @Parameter(description = "사용자 ID") @RequestParam Long memberId,
-            @RequestBody CommentRequest request) {
+            @Valid @RequestBody CommentRequest request) {
         CommentResponse response = commentService.createComment(emotionBandId, memberId, request);
         return ResponseEntity.ok(response);
     }
