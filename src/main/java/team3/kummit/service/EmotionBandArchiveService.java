@@ -87,6 +87,6 @@ public class EmotionBandArchiveService {
     }
 
     public List<Long> findEmotionBandIdListByCreator(Long memberId){
-        return archiveRepository.findEmotionBandIdListByCreator(memberId);
+        return archiveRepository.findEmotionBandIdListByMemberId(memberId);
     }
 }

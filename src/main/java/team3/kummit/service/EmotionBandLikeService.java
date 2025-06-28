@@ -96,6 +96,6 @@ public class EmotionBandLikeService {
     }
 
     public List<Long> findEmotionBandListByMemberId(Long memberId) {
-        return bandRepository.findEmotionBandIdListByCreator(memberId);
+        return likeRepository.findEmotionBandIdListByMemberId(memberId);
     }
 }
