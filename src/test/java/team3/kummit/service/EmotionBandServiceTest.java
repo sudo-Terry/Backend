@@ -30,7 +30,8 @@ class EmotionBandServiceTest {
     @Test
     void testCreateEmotionBand_Success() {
         // Arrange
-        Member creator = Member.builder().id(1L).build();
+        Member creator = Member.builder().id(1L).bandCreateCount(0)
+                .songAddCount(0).build();
         EmotionBandCreateRequest.SongDto songDto = new EmotionBandCreateRequest.SongDto();
         songDto.setTitle("Test Song");
         songDto.setArtist("Test Artist");
