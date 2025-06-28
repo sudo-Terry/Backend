@@ -18,4 +18,13 @@ public interface EmotionBandRepository extends JpaRepository<EmotionBand, Long> 
     // 현재 시간이 endTime을 지나지 않은 밴드들 중 endTime 기준 최신순 상위 10개
     @Query("SELECT e FROM EmotionBand e WHERE e.endTime > :currentTime ORDER BY e.endTime DESC")
     List<EmotionBand> findTop10ByEndTimeDescAndEndTimeAfter(@Param("currentTime") LocalDateTime currentTime);
+
+    @Query("SELECT eb.id FROM EmotionBand eb where eb.creator.id =:memberId")
+    List<Long> findEmotionBandIdListByCreator(Long memberId);
+
+    @Query("SELECT eb FROM EmotionBand eb left join fetch eb.songs ebs " +
+            "WHERE eb.endTime > :currentTime and eb.id in :emotionBandIdList")
+    List<EmotionBand> findAllByEmotionBandIdList(List<Long> emotionBandIdList, LocalDateTime currentTime);
+
+
 }

@@ -3,6 +3,7 @@ package team3.kummit.config;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Arrays;
+import java.util.List;
 
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
@@ -13,9 +14,11 @@ import lombok.extern.slf4j.Slf4j;
 import team3.kummit.domain.Comment;
 import team3.kummit.domain.EmotionBand;
 import team3.kummit.domain.Member;
+import team3.kummit.domain.Song;
 import team3.kummit.repository.CommentRepository;
 import team3.kummit.repository.EmotionBandRepository;
 import team3.kummit.repository.MemberRepository;
+import team3.kummit.repository.SongRepository;
 
 @Slf4j
 @Configuration
@@ -25,6 +28,7 @@ public class DataInitializer {
     private final MemberRepository memberRepository;
     private final EmotionBandRepository emotionBandRepository;
     private final CommentRepository commentRepository;
+    private final SongRepository songRepository;
 
     @Bean
     public CommandLineRunner initData() {
@@ -135,6 +139,118 @@ public class DataInitializer {
                     .build();
 
             emotionBandRepository.saveAll(Arrays.asList(band1, band2, band3, band4, band5));
+
+            //음악
+            List<Song> songs = List.of(
+                    // 🎵 band1
+                    Song.builder()
+                            .creator(member1)
+                            .creatorName(member1.getName())
+                            .emotionBand(band1)
+                            .title("Happy Vibes")
+                            .artist("Sunny Days")
+                            .albumImageLink("https://example.com/album1.jpg")
+                            .previewLink("https://example.com/preview1.mp3")
+                            .build(),
+
+                    Song.builder()
+                            .creator(member2)
+                            .creatorName(member2.getName())
+                            .emotionBand(band1)
+                            .title("Celebrate Life")
+                            .artist("Joy Makers")
+                            .albumImageLink("https://example.com/album2.jpg")
+                            .previewLink("https://example.com/preview2.mp3")
+                            .build(),
+
+                    // 🎵 band2
+                    Song.builder()
+                            .creator(member2)
+                            .creatorName(member2.getName())
+                            .emotionBand(band2)
+                            .title("Rainy Tears")
+                            .artist("Blue Heart")
+                            .albumImageLink("https://example.com/album3.jpg")
+                            .previewLink("https://example.com/preview3.mp3")
+                            .build(),
+
+                    // 🎵 band3
+                    Song.builder()
+                            .creator(member1)
+                            .creatorName(member1.getName())
+                            .emotionBand(band3)
+                            .title("Let It Out")
+                            .artist("Firestorm")
+                            .albumImageLink("https://example.com/album4.jpg")
+                            .previewLink("https://example.com/preview4.mp3")
+                            .build(),
+
+                    // 🎵 band4
+                    Song.builder()
+                            .creator(member3)
+                            .creatorName(member3.getName())
+                            .emotionBand(band4)
+                            .title("Calm Sea")
+                            .artist("Zen Sounds")
+                            .albumImageLink("https://example.com/album5.jpg")
+                            .previewLink("https://example.com/preview5.mp3")
+                            .build(),
+
+                    Song.builder()
+                            .creator(member3)
+                            .creatorName(member3.getName())
+                            .emotionBand(band4)
+                            .title("Tranquility")
+                            .artist("Mindscape")
+                            .albumImageLink("https://example.com/album6.jpg")
+                            .previewLink("https://example.com/preview6.mp3")
+                            .build(),
+
+                    Song.builder()
+                            .creator(member1)
+                            .creatorName(member1.getName())
+                            .emotionBand(band4)
+                            .title("Stillness")
+                            .artist("Slow Flow")
+                            .albumImageLink("https://example.com/album7.jpg")
+                            .previewLink("https://example.com/preview7.mp3")
+                            .build(),
+
+                    // 🎵 band5 (종료된 밴드)
+                    Song.builder()
+                            .creator(member3)
+                            .creatorName(member3.getName())
+                            .emotionBand(band5)
+                            .title("Hackathon Anthem")
+                            .artist("Dev Beats")
+                            .albumImageLink("https://example.com/album8.jpg")
+                            .previewLink("https://example.com/preview8.mp3")
+                            .build(),
+
+                    Song.builder()
+                            .creator(member2)
+                            .creatorName(member2.getName())
+                            .emotionBand(band5)
+                            .title("Sprint Mode")
+                            .artist("Code Rush")
+                            .albumImageLink("https://example.com/album9.jpg")
+                            .previewLink("https://example.com/preview9.mp3")
+                            .build(),
+
+                    Song.builder()
+                            .creator(member1)
+                            .creatorName(member1.getName())
+                            .emotionBand(band5)
+                            .title("Bug Fix Groove")
+                            .artist("Stack Tracers")
+                            .albumImageLink("https://example.com/album10.jpg")
+                            .previewLink("https://example.com/preview10.mp3")
+                            .build()
+            );
+
+            songRepository.saveAll(songs);
+
+
 
             // 댓글 더미 데이터 생성
             Comment comment1 = Comment.builder()
