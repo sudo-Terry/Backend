@@ -16,7 +16,7 @@ public class EmotionBandResponse {
     private Long id;
     private String creatorName;
     private String emotion;
-    private String comment;
+    private String description;
     private LocalDateTime endTime;
     private Integer likeCount;
     private Integer peopleCount;
@@ -28,7 +28,7 @@ public class EmotionBandResponse {
                 .id(emotionBand.getId())
                 .creatorName(emotionBand.getCreatorName())
                 .emotion(emotionBand.getEmotion())
-                .comment(emotionBand.getComment())
+                .description(emotionBand.getDescription())
                 .endTime(emotionBand.getEndTime())
                 .likeCount(emotionBand.getLikeCount())
                 .peopleCount(emotionBand.getPeopleCount())
