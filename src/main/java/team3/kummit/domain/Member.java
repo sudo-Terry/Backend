@@ -27,4 +27,11 @@ public class Member {
     private Integer likeCount;
     private Integer songAddCount;
 
+    public void incrementBandCreateCount() {
+        this.bandCreateCount++;
+    }
+    public void incrementSongAddCount() {
+        this.songAddCount++;
+    }
+
 }
