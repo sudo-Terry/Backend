@@ -1,19 +1,20 @@
 package team3.kummit.config;
 
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.Arrays;
+
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
+
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import team3.kummit.domain.EmotionBand;
 import team3.kummit.domain.Member;
 import team3.kummit.repository.EmotionBandRepository;
 import team3.kummit.repository.MemberRepository;
-
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.util.Arrays;
 
 @Slf4j
 @Configuration
@@ -28,7 +29,7 @@ public class DataInitializer {
     public CommandLineRunner initData() {
         return args -> {
             log.info("더미 데이터 초기화 시작...");
-            
+
             // 기존 데이터가 있으면 스킵
             if (memberRepository.count() > 0) {
                 log.info("이미 데이터가 존재합니다. 더미 데이터 생성을 건너뜁니다.");
@@ -123,4 +124,4 @@ public class DataInitializer {
             log.info("생성된 감정밴드 수: {}", emotionBandRepository.count());
         };
     }
-} 
+}
