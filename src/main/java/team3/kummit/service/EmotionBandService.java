@@ -21,6 +21,7 @@ import team3.kummit.repository.SongRepository;
 public class EmotionBandService {
     private final EmotionBandRepository emotionBandRepository;
     private final EmotionBandLikeService emotionBandLikeService;
+    private final EmotionBandArchiveService emotionBandArchiveService;
     private final CommentService commentService;
     private final SongRepository songRepository;
     private final MemberService memberService;
@@ -63,7 +64,11 @@ public class EmotionBandService {
                 .limit(3) // 최대 3개만
                 .map(band -> {
                     boolean isLiked = memberId != null && emotionBandLikeService.isLiked(band.getId(), memberId);
-                    return EmotionBandResponse.from(band, isLiked);
+                    List<SongResponse> songs = songRepository.findByEmotionBandIdOrderByCreatedAtDesc(band.getId())
+                            .stream()
+                            .map(SongResponse::from)
+                            .collect(Collectors.toList());
+                    return EmotionBandResponse.from(band, isLiked, songs);
                 })
                 .collect(Collectors.toList());
 
@@ -73,7 +78,11 @@ public class EmotionBandService {
                 .limit(10) // 최대 10개만
                 .map(band -> {
                     boolean isLiked = memberId != null && emotionBandLikeService.isLiked(band.getId(), memberId);
-                    return EmotionBandResponse.from(band, isLiked);
+                    List<SongResponse> songs = songRepository.findByEmotionBandIdOrderByCreatedAtDesc(band.getId())
+                            .stream()
+                            .map(SongResponse::from)
+                            .collect(Collectors.toList());
+                    return EmotionBandResponse.from(band, isLiked, songs);
                 })
                 .collect(Collectors.toList());
 
@@ -89,11 +98,15 @@ public class EmotionBandService {
                 .orElseThrow(() -> new ResourceNotFoundException("감정밴드를 찾을 수 없습니다."));
 
         boolean isLiked = memberId != null && emotionBandLikeService.isLiked(emotionBandId, memberId);
-        return EmotionBandResponse.from(band, isLiked);
+        List<SongResponse> songs = songRepository.findByEmotionBandIdOrderByCreatedAtDesc(emotionBandId)
+                .stream()
+                .map(SongResponse::from)
+                .collect(Collectors.toList());
+        return EmotionBandResponse.from(band, isLiked, songs);
     }
 
     @Transactional(readOnly = true)
-    public EmotionBandDetailResponse getEmotionBandDetail(Long emotionBandId) {
+    public EmotionBandDetailResponse getEmotionBandDetail(Long emotionBandId, Long memberId) {
         // 감정밴드 조회
         EmotionBand emotionBand = emotionBandRepository.findById(emotionBandId)
                 .orElseThrow(() -> new ResourceNotFoundException("감정밴드를 찾을 수 없습니다."));
@@ -107,6 +120,9 @@ public class EmotionBandService {
         // 댓글 목록 조회
         List<CommentResponse> comments = commentService.getComments(emotionBandId);
 
-        return EmotionBandDetailResponse.from(emotionBand, songs, comments);
+        // 보관 여부 확인
+        boolean isArchived = memberId != null && emotionBandArchiveService.isArchived(emotionBandId, memberId);
+
+        return EmotionBandDetailResponse.from(emotionBand, songs, comments, isArchived);
     }
 }

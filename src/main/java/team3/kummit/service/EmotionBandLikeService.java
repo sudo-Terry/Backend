@@ -27,19 +27,31 @@ public class EmotionBandLikeService {
         return likeRepository.findByCreatorIdAndEmotionBandId(memberId, emotionBandId)
                 .map(like -> {
                     likeRepository.delete(like);
-                    EmotionBand updatedBand = EmotionBand.builder()
+
+                    // likeCount 감소
+                    Integer currentBandLikeCount = band.getLikeCount() != null ? band.getLikeCount() : 0;
+                    Integer currentMemberLikeCount = member.getLikeCount() != null ? member.getLikeCount() : 0;
+
+                    EmotionBand updatedBand = band.toBuilder()
                             .id(band.getId())
                             .creator(band.getCreator())
                             .creatorName(band.getCreatorName())
                             .emotion(band.getEmotion())
                             .description(band.getDescription())
                             .endTime(band.getEndTime())
-                            .likeCount(band.getLikeCount() - 1)
+                            .likeCount(Math.max(0, currentBandLikeCount - 1))
                             .peopleCount(band.getPeopleCount())
                             .songCount(band.getSongCount())
                             .commentCount(band.getCommentCount())
                             .build();
+
+                    Member updatedMember = member.toBuilder()
+                            .likeCount(Math.max(0, currentMemberLikeCount - 1))
+                            .build();
+
                     bandRepository.save(updatedBand);
+                    memberRepository.save(updatedMember);
+
                     return false;
                 })
                 .orElseGet(() -> {
@@ -47,19 +59,31 @@ public class EmotionBandLikeService {
                             .creator(member)
                             .emotionBand(band)
                             .build());
-                    EmotionBand updatedBand = EmotionBand.builder()
+
+                    // likeCount 증가
+                    Integer currentBandLikeCount = band.getLikeCount() != null ? band.getLikeCount() : 0;
+                    Integer currentMemberLikeCount = member.getLikeCount() != null ? member.getLikeCount() : 0;
+
+                    EmotionBand updatedBand = band.toBuilder()
                             .id(band.getId())
                             .creator(band.getCreator())
                             .creatorName(band.getCreatorName())
                             .emotion(band.getEmotion())
                             .description(band.getDescription())
                             .endTime(band.getEndTime())
-                            .likeCount(band.getLikeCount() + 1)
+                            .likeCount(currentBandLikeCount + 1)
                             .peopleCount(band.getPeopleCount())
                             .songCount(band.getSongCount())
                             .commentCount(band.getCommentCount())
                             .build();
+
+                    Member updatedMember = member.toBuilder()
+                            .likeCount(currentMemberLikeCount + 1)
+                            .build();
+
                     bandRepository.save(updatedBand);
+                    memberRepository.save(updatedMember);
+
                     return true;
                 });
     }

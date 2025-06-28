@@ -67,8 +67,9 @@ public class EmotionBandController {
     })
     @GetMapping("/{emotionBandId}/detail")
     public ResponseEntity<EmotionBandDetailResponse> getEmotionBandDetail(
-            @Parameter(description = "감정밴드 ID") @PathVariable Long emotionBandId) {
-        EmotionBandDetailResponse response = emotionBandService.getEmotionBandDetail(emotionBandId);
+            @Parameter(description = "감정밴드 ID") @PathVariable Long emotionBandId,
+            @Parameter(description = "사용자 ID") @RequestParam Long memberId) {
+        EmotionBandDetailResponse response = emotionBandService.getEmotionBandDetail(emotionBandId, memberId);
         return ResponseEntity.ok(response);
     }
 }

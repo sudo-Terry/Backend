@@ -1,6 +1,7 @@
 package team3.kummit.dto;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -23,8 +24,9 @@ public class EmotionBandResponse {
     private Integer songCount;
     private Integer commentCount;
     private boolean isLiked;
+    private List<SongResponse> songs;
 
-    public static EmotionBandResponse from(EmotionBand emotionBand, boolean isLiked) {
+    public static EmotionBandResponse from(EmotionBand emotionBand, boolean isLiked, List<SongResponse> songs) {
         return EmotionBandResponse.builder()
                 .id(emotionBand.getId())
                 .creatorName(emotionBand.getCreatorName())
@@ -36,6 +38,7 @@ public class EmotionBandResponse {
                 .songCount(emotionBand.getSongCount())
                 .commentCount(emotionBand.getCommentCount())
                 .isLiked(isLiked)
+                .songs(songs)
                 .build();
     }
 }
