@@ -12,17 +12,17 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class ITunesSearchService {
+public class MusicSearchService {
 
     private final RestTemplate restTemplate;
     private final MusicApiResponseParser apiResponseParser;
     private static final String BASE_URL = "https://itunes.apple.com/search";
 
-    public List<MusicResponse> searchMusic(String keyword) {
-        String encodedUserKeyword = URLEncoder.encode(keyword, StandardCharsets.UTF_8);
+    public List<MusicResponse> searchMusic(String userQuery) {
+        String encodedUserQuery = URLEncoder.encode(userQuery, StandardCharsets.UTF_8);
 
         String url = UriComponentsBuilder.fromHttpUrl(BASE_URL)
-                .queryParam("term", encodedUserKeyword)
+                .queryParam("term", encodedUserQuery)
                 .queryParam("country", "KR")
                 .queryParam("media", "music")
                 .queryParam("limit", 50)
