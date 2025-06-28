@@ -61,7 +61,7 @@ public class MemberController {
         summary = "회원 프로필 조회",
         description = "회원 ID를 통해 회원의 프로필 정보를 조회합니다. 회원 가입 날짜, 밴드 생성/참여 횟수, 좋아요 수, 추가한 곡 수 등의 정보를 반환합니다.",
         parameters = {
-            @Parameter(name = "memberId", description = "사용자 ID (선택사항)", required = false)
+            @Parameter(name = "memberId", description = "사용자 ID", required = true)
         }
     )
     @ApiResponses(value = {
@@ -70,7 +70,7 @@ public class MemberController {
     })
     @GetMapping("/profile")
     public ResponseEntity<MemberProfileResponse> memberProfileGet(
-            @Parameter(description = "사용자 ID (선택사항)") @RequestParam Long memberId) {
+            @Parameter(description = "사용자 ID") @RequestParam Long memberId) {
         Member member = memberService.findById(memberId);
         return ResponseEntity.status(HttpStatus.CREATED).body(new MemberProfileResponse(
                 member.getName(),
@@ -85,7 +85,7 @@ public class MemberController {
         summary = "사용자가 생성한 감정 밴드 목록 조회",
         description = "사용자의 ID를 전달받아, 해당 사용자가 생성한 감정 밴드 목록을 조회합니다. 조회된 감정 밴드의 상세 정보가 포함됩니다.",
         parameters = {
-            @Parameter(name = "memberId", description = "사용자 ID (선택사항)", required = false)
+            @Parameter(name = "memberId", description = "사용자 ID", required = true)
         }
     )
     @ApiResponses(value = {
@@ -105,7 +105,7 @@ public class MemberController {
             summary = "사용자가 공감한 감정 밴드 목록 조회",
             description = "사용자의 ID를 전달받아, 해당 사용자가 공감한 감정 밴드 목록을 조회합니다. 조회된 감정 밴드의 상세 정보가 포함됩니다.",
             parameters = {
-                    @Parameter(name = "memberId", description = "사용자 ID (선택사항)", required = false)
+                    @Parameter(name = "memberId", description = "사용자 ID", required = true)
             }
     )
     @ApiResponses(value = {
@@ -126,7 +126,7 @@ public class MemberController {
             summary = "사용자가 저장한 감정 밴드 목록 조회",
             description = "사용자의 ID를 전달받아, 해당 사용자가 저장한 감정 밴드 목록을 조회합니다. 조회된 감정 밴드의 상세 정보가 포함됩니다.",
             parameters = {
-                    @Parameter(name = "memberId", description = "사용자 ID (선택사항)", required = false)
+                    @Parameter(name = "memberId", description = "사용자 ID", required = true)
             }
     )
     @ApiResponses(value = {

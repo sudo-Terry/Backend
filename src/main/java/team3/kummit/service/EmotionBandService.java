@@ -123,7 +123,10 @@ public class EmotionBandService {
         // 보관 여부 확인
         boolean isArchived = memberId != null && emotionBandArchiveService.isArchived(emotionBandId, memberId);
 
-        return EmotionBandDetailResponse.from(emotionBand, songs, comments, isArchived);
+        // 좋아요 여부 확인
+        boolean isLiked = memberId != null && emotionBandLikeService.isLiked(emotionBandId, memberId);
+
+        return EmotionBandDetailResponse.from(emotionBand, songs, comments, isArchived, isLiked);
     }
 
 
