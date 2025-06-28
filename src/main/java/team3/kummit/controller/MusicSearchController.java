@@ -1,5 +1,14 @@
 package team3.kummit.controller;
 
+import java.util.List;
+
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -7,20 +16,12 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import jakarta.validation.constraints.NotBlank;
+
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
 import team3.kummit.dto.MusicSearchResponse;
 import team3.kummit.service.music.MusicResponse;
 import team3.kummit.service.music.MusicSearchService;
-
-import java.util.List;
 
 
 @Slf4j
@@ -37,7 +38,6 @@ public class MusicSearchController {
             @ApiResponse(responseCode = "200", description = "검색 성공",
                          content = @Content(mediaType = "application/json",
                          schema = @Schema(implementation = MusicSearchResponse.class))),
-            @ApiResponse(responseCode = "400", description = "잘못된 요청 (입력 데이터 부족 등)"),
             @ApiResponse(responseCode = "500", description = "서버 오류")
     })
     @GetMapping("/search")
