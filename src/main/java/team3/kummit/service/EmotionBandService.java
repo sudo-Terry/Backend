@@ -125,4 +125,13 @@ public class EmotionBandService {
 
         return EmotionBandDetailResponse.from(emotionBand, songs, comments, isArchived);
     }
+
+
+    public List<Long> findEmotionBandIdListByCreator(Long memberId){
+        return emotionBandRepository.findEmotionBandIdListByCreator(memberId);
+    }
+
+    public List<EmotionBand> findAllByEmotionBandIdList(List<Long> emotionBandIdList){
+        return emotionBandRepository.findAllByEmotionBandIdList(emotionBandIdList, LocalDateTime.now());
+    }
 }
