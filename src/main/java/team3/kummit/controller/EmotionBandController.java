@@ -13,7 +13,6 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
 import lombok.RequiredArgsConstructor;
-import team3.kummit.domain.Member;
 import team3.kummit.dto.EmotionBandCreateRequest;
 import team3.kummit.dto.EmotionBandCreateResponse;
 import team3.kummit.dto.EmotionBandDetailResponse;
