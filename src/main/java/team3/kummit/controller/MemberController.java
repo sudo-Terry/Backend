@@ -1,5 +1,6 @@
 package team3.kummit.controller;
 
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -15,9 +16,6 @@ import lombok.extern.slf4j.Slf4j;
 import team3.kummit.domain.Member;
 import team3.kummit.dto.*;
 import team3.kummit.service.MemberService;
-import team3.kummit.service.music.MusicResponse;
-
-import java.util.List;
 
 
 @Slf4j
@@ -48,6 +46,17 @@ public class MemberController {
         return ResponseEntity.ok(new MemberLoginResponse(member.getId()));
     }
 
+    @Operation(
+        summary = "회원 프로필 조회",
+        description = "회원 ID를 통해 회원의 프로필 정보를 조회합니다. 회원 가입 날짜, 밴드 생성/참여 횟수, 좋아요 수, 추가한 곡 수 등의 정보를 반환합니다.",
+        parameters = {
+            @Parameter(name = "memberId", description = "사용자 ID (선택사항)", required = false)
+        }
+    )
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "201", description = "프로필 조회 성공"),
+        @ApiResponse(responseCode = "404", description = "회원 정보를 찾을 수 없음")
+    })
     @GetMapping("/profile")
     public ResponseEntity<MemberProfileResponse> createEmotionBand(
             @Parameter(description = "사용자 ID (선택사항)") @RequestParam Long memberId) {
@@ -60,6 +69,9 @@ public class MemberController {
                 member.getLikeCount() != null ? member.getLikeCount() : 0,
                 member.getSongAddCount() != null ? member.getSongAddCount() : 0));
     }
+
+
+
 
 
 
