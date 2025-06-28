@@ -28,7 +28,6 @@ public class DataInitializer {
     private final CommentRepository commentRepository;
 
     @Bean
-    @Profile("dev") // 개발 환경에서만 실행
     public CommandLineRunner initData() {
         return args -> {
             log.info("더미 데이터 초기화 시작...");
