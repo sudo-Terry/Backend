@@ -41,6 +41,7 @@ public class EmotionBandController {
         @ApiResponse(responseCode = "500", description = "서버 오류")
     })
     public ResponseEntity<EmotionBandCreateResponse> createEmotionBand(
+
             @Parameter(description = "사용자 ID") @RequestParam(required = true) Long memberId,
             @RequestBody EmotionBandCreateRequest emotionBandCreateRequest) {
         Long emotionBandId = emotionBandService.createEmotionBand(memberId, emotionBandCreateRequest);

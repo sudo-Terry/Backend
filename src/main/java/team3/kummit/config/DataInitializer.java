@@ -142,111 +142,107 @@ public class DataInitializer {
 
             //음악
             List<Song> songs = List.of(
-                    // 🎵 band1
                     Song.builder()
                             .creator(member1)
                             .creatorName(member1.getName())
                             .emotionBand(band1)
-                            .title("Happy Vibes")
-                            .artist("Sunny Days")
-                            .albumImageLink("https://example.com/album1.jpg")
-                            .previewLink("https://example.com/preview1.mp3")
+                            .title("Girl Of My Dreams")
+                            .artist("Juice WRLD, SUGA & 방탄소년단")
+                            .albumImageLink("https://is1-ssl.mzstatic.com/image/thumb/Video126/v4/9d/00/59/9d005967-3895-8c85-7949-4ac3e0ba9fb6/21UM1IM55795.crop.jpg/100x100bb.jpg")
+                            .previewLink(null)
+                            .build(),
+
+                    Song.builder()
+                            .creator(member1)
+                            .creatorName(member1.getName())
+                            .emotionBand(band1)
+                            .title("Dreamers (Music from the FiFA World Cup Qatar 2022 Official Soundtrack)")
+                            .artist("정국 & 방탄소년단")
+                            .albumImageLink("https://is1-ssl.mzstatic.com/image/thumb/Music122/v4/03/c2/c0/03c2c0d5-bb76-e143-847f-52ff6c4c808f/197089992972.png/100x100bb.jpg")
+                            .previewLink("https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview112/v4/f8/50/c7/f850c704-f96a-ffde-dc3d-8d27d81bf988/mzaf_7734350799442212815.plus.aac.p.m4a")
                             .build(),
 
                     Song.builder()
                             .creator(member2)
                             .creatorName(member2.getName())
                             .emotionBand(band1)
-                            .title("Celebrate Life")
-                            .artist("Joy Makers")
-                            .albumImageLink("https://example.com/album2.jpg")
-                            .previewLink("https://example.com/preview2.mp3")
+                            .title("SUGA's Interlude")
+                            .artist("Halsey, SUGA & 방탄소년단")
+                            .albumImageLink("https://is1-ssl.mzstatic.com/image/thumb/Music125/v4/09/50/2f/09502f77-c2c9-0ae0-7e21-945a6bc80119/19UMGIM75722.rgb.jpg/100x100bb.jpg")
+                            .previewLink("https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/14/b4/b6/14b4b67c-d127-c624-1092-f29a11a552ef/mzaf_10313807235220944931.plus.aac.p.m4a")
                             .build(),
 
-                    // 🎵 band2
+                    Song.builder()
+                            .creator(member3)
+                            .creatorName(member3.getName())
+                            .emotionBand(band2)
+                            .title("Love Me Again")
+                            .artist("뷔")
+                            .albumImageLink("https://is1-ssl.mzstatic.com/image/thumb/Music116/v4/5e/b7/12/5eb712b8-331f-bb2d-d628-cb1d965f869f/196922581403_Cover.jpg/100x100bb.jpg")
+                            .previewLink("https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview116/v4/77/4b/d8/774bd840-b98a-21ed-b813-5b6c3c0cdee2/mzaf_9188777297194981539.plus.aac.p.m4a")
+                            .build(),
+
                     Song.builder()
                             .creator(member2)
                             .creatorName(member2.getName())
                             .emotionBand(band2)
-                            .title("Rainy Tears")
-                            .artist("Blue Heart")
-                            .albumImageLink("https://example.com/album3.jpg")
-                            .previewLink("https://example.com/preview3.mp3")
+                            .title("Sweet Night")
+                            .artist("뷔")
+                            .albumImageLink("https://is1-ssl.mzstatic.com/image/thumb/Music126/v4/34/d8/eb/34d8ebc6-451c-40f5-cf7a-936e36a6f778/8809717452520.jpg/100x100bb.jpg")
+                            .previewLink("https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview126/v4/8c/bc/aa/8cbcaa6e-2914-ef28-8d3a-e6d9f70f5267/mzaf_16932685891180730213.plus.aac.p.m4a")
                             .build(),
 
-                    // 🎵 band3
                     Song.builder()
-                            .creator(member1)
-                            .creatorName(member1.getName())
+                            .creator(member3)
+                            .creatorName(member3.getName())
                             .emotionBand(band3)
-                            .title("Let It Out")
-                            .artist("Firestorm")
-                            .albumImageLink("https://example.com/album4.jpg")
-                            .previewLink("https://example.com/preview4.mp3")
-                            .build(),
-
-                    // 🎵 band4
-                    Song.builder()
-                            .creator(member3)
-                            .creatorName(member3.getName())
-                            .emotionBand(band4)
-                            .title("Calm Sea")
-                            .artist("Zen Sounds")
-                            .albumImageLink("https://example.com/album5.jpg")
-                            .previewLink("https://example.com/preview5.mp3")
-                            .build(),
-
-                    Song.builder()
-                            .creator(member3)
-                            .creatorName(member3.getName())
-                            .emotionBand(band4)
-                            .title("Tranquility")
-                            .artist("Mindscape")
-                            .albumImageLink("https://example.com/album6.jpg")
-                            .previewLink("https://example.com/preview6.mp3")
-                            .build(),
-
-                    Song.builder()
-                            .creator(member1)
-                            .creatorName(member1.getName())
-                            .emotionBand(band4)
-                            .title("Stillness")
-                            .artist("Slow Flow")
-                            .albumImageLink("https://example.com/album7.jpg")
-                            .previewLink("https://example.com/preview7.mp3")
-                            .build(),
-
-                    // 🎵 band5 (종료된 밴드)
-                    Song.builder()
-                            .creator(member3)
-                            .creatorName(member3.getName())
-                            .emotionBand(band5)
-                            .title("Hackathon Anthem")
-                            .artist("Dev Beats")
-                            .albumImageLink("https://example.com/album8.jpg")
-                            .previewLink("https://example.com/preview8.mp3")
+                            .title("on the street (solo version)")
+                            .artist("j-hope")
+                            .albumImageLink("https://is1-ssl.mzstatic.com/image/thumb/Music126/v4/d2/05/0f/d2050f71-95a3-1bad-daaf-b8922e0918d8/196922839696_Cover.jpg/100x100bb.jpg")
+                            .previewLink("https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview122/v4/b8/7a/c0/b87ac0de-d2db-ff8c-2434-aa99d9fc2523/mzaf_10739315547877403513.plus.aac.p.m4a")
                             .build(),
 
                     Song.builder()
                             .creator(member2)
                             .creatorName(member2.getName())
-                            .emotionBand(band5)
-                            .title("Sprint Mode")
-                            .artist("Code Rush")
-                            .albumImageLink("https://example.com/album9.jpg")
-                            .previewLink("https://example.com/preview9.mp3")
+                            .emotionBand(band3)
+                            .title("Winter Bear")
+                            .artist("뷔")
+                            .albumImageLink("https://is1-ssl.mzstatic.com/image/thumb/Music126/v4/9a/2f/65/9a2f65a2-75a8-a0e7-7cbd-641bdddd0a64/194491211226_Cover.jpg/100x100bb.jpg")
+                            .previewLink("https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview126/v4/40/ba/97/40ba97a4-2eb0-c49e-7bd4-94c6b72e3a60/mzaf_4010340737680245731.plus.aac.p.m4a")
+                            .build(),
+
+                    Song.builder()
+                            .creator(member1)
+                            .creatorName(member1.getName())
+                            .emotionBand(band4)
+                            .title("FRI(END)S")
+                            .artist("뷔")
+                            .albumImageLink("https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/cf/d0/5b/cfd05b16-1638-2b3c-b8fd-7d539bb373dc/196922869839_Cover.jpg/100x100bb.jpg")
+                            .previewLink("https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview122/v4/d6/de/9b/d6de9ba5-e2ad-7220-c2b2-e8f70be99a54/mzaf_911547786802068614.plus.aac.p.m4a")
+                            .build(),
+
+                    Song.builder()
+                            .creator(member3)
+                            .creatorName(member3.getName())
+                            .emotionBand(band4)
+                            .title("Killin' It Girl")
+                            .artist("j-hope & GloRilla")
+                            .albumImageLink("https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/c8/9e/31/c89e3138-deb0-2f40-c9d7-0704ff78419b/198704553134_Cover.jpg/100x100bb.jpg")
+                            .previewLink("https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/66/ae/3f/66ae3f02-6b3b-c460-f70f-4e5ee139bc6c/mzaf_12313826851799150477.plus.aac.p.m4a")
                             .build(),
 
                     Song.builder()
                             .creator(member1)
                             .creatorName(member1.getName())
                             .emotionBand(band5)
-                            .title("Bug Fix Groove")
-                            .artist("Stack Tracers")
-                            .albumImageLink("https://example.com/album10.jpg")
-                            .previewLink("https://example.com/preview10.mp3")
+                            .title("Slow Dancing")
+                            .artist("뷔")
+                            .albumImageLink("https://is1-ssl.mzstatic.com/image/thumb/Music116/v4/93/51/e0/9351e0b4-a565-4232-d797-f60ca3aba82f/196922580031_Cover.jpg/100x100bb.jpg")
+                            .previewLink("https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview116/v4/c0/b1/f5/c0b1f501-bfcc-d055-1b61-d773321169b8/mzaf_1938202482014025895.plus.aac.p.m4a")
                             .build()
             );
+
 
             songRepository.saveAll(songs);
 
