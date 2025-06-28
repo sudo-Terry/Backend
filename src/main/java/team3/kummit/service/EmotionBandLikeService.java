@@ -1,5 +1,7 @@
 package team3.kummit.service;
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -9,8 +11,6 @@ import team3.kummit.exception.ResourceNotFoundException;
 import team3.kummit.repository.EmotionBandLikeRepository;
 import team3.kummit.repository.EmotionBandRepository;
 import team3.kummit.repository.MemberRepository;
-
-import java.util.List;
 
 @Service
 @RequiredArgsConstructor

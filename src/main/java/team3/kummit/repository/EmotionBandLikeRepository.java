@@ -4,8 +4,8 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-
 import org.springframework.data.jpa.repository.Query;
+
 import team3.kummit.domain.EmotionBandLike;
 
 public interface EmotionBandLikeRepository extends JpaRepository<EmotionBandLike, Long> {
