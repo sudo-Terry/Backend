@@ -20,6 +20,8 @@ public class SongResponse {
     private LocalDateTime createdAt;
     private String albumImageLink;
     private String previewLink;
+    private Long emotionBandId;
+    private String emotion;
 
     public static SongResponse from(Song song) {
         return SongResponse.builder()
@@ -30,6 +32,8 @@ public class SongResponse {
                 .createdAt(song.getCreatedAt())
                 .albumImageLink(song.getAlbumImageLink())
                 .previewLink(song.getPreviewLink())
+                .emotionBandId(song.getEmotionBand().getId())
+                .emotion(song.getEmotionBand().getEmotion())
                 .build();
     }
 }
