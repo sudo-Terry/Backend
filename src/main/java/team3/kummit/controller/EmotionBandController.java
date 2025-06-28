@@ -32,7 +32,7 @@ public class EmotionBandController {
     @PostMapping()
     @Operation(
         summary = "새 감정밴드 생성",
-        description = "새로운 감정밴드를 생성합니다. 사용자 ID는 선택사항입니다.",
+        description = "새로운 감정밴드를 생성합니다.",
         tags = {"EmotionBand"}
     )
     @ApiResponses(value = {
@@ -41,7 +41,7 @@ public class EmotionBandController {
         @ApiResponse(responseCode = "500", description = "서버 오류")
     })
     public ResponseEntity<EmotionBandCreateResponse> createEmotionBand(
-            @Parameter(description = "사용자 ID (선택사항)") @RequestParam(required = false) Long memberId,
+            @Parameter(description = "사용자 ID") @RequestParam(required = true) Long memberId,
             @RequestBody EmotionBandCreateRequest emotionBandCreateRequest) {
         Long emotionBandId = emotionBandService.createEmotionBand(memberId, emotionBandCreateRequest);
         return ResponseEntity.status(HttpStatus.CREATED).body(new EmotionBandCreateResponse(emotionBandId));
