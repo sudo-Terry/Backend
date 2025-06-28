@@ -89,7 +89,7 @@ public class DataInitializer {
                     .creatorName(member2.getName())
                     .emotion("슬픔")
                     .comment("우울한 날씨에 맞춰 슬픈 노래를 들어보세요")
-                    .endTime(LocalDateTime.now().plusDays(5))
+                    .endTime(LocalDateTime.now().plusDays(3))
                     .likeCount(3)
                     .peopleCount(2)
                     .songCount(1)
@@ -100,7 +100,7 @@ public class DataInitializer {
                     .creatorName(member1.getName())
                     .emotion("분노")
                     .comment("스트레스 받는 하루였지만 음악으로 해소해요")
-                    .endTime(LocalDateTime.now().plusDays(3))
+                    .endTime(LocalDateTime.now().plusDays(5))
                     .likeCount(2)
                     .peopleCount(1)
                     .songCount(0)
@@ -111,13 +111,24 @@ public class DataInitializer {
                     .creatorName(member3.getName())
                     .emotion("평온")
                     .comment("차분하고 평화로운 마음으로 음악을 감상해보세요")
-                    .endTime(LocalDateTime.now().plusDays(10))
+                    .endTime(LocalDateTime.now().plusDays(1))
                     .likeCount(8)
                     .peopleCount(4)
                     .songCount(3)
                     .build();
 
-            emotionBandRepository.saveAll(Arrays.asList(band1, band2, band3, band4));
+            EmotionBand band5 = EmotionBand.builder()
+                    .creator(member3)
+                    .creatorName(member3.getName())
+                    .emotion("즐거움")
+                    .comment("오늘은 너무 즐거운 해커톤 데이")
+                    .endTime(LocalDateTime.now().minusDays(1))
+                    .likeCount(999)
+                    .peopleCount(99)
+                    .songCount(10)
+                    .build();
+
+            emotionBandRepository.saveAll(Arrays.asList(band1, band2, band3, band4, band5));
 
             log.info("더미 데이터 초기화 완료!");
             log.info("생성된 멤버 수: {}", memberRepository.count());
