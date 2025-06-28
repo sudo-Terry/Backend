@@ -50,11 +50,9 @@ public class MemberController {
     public ResponseEntity<MemberLoginResponse> memberLogin(
             @Parameter(description = "로그인 요청 데이터 (이메일과 비밀번호 포함)")
             @RequestBody MemberLoginRequest memberLoginRequest) {
-        Member member = memberService.findByName(memberLoginRequest.name());
-        if(member == null){
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
-        }
-        return ResponseEntity.ok(new MemberLoginResponse(member.getId()));
+        return memberService.findByName(memberLoginRequest.name())
+                .map(member -> ResponseEntity.ok(new MemberLoginResponse(member.getId())))
+                .orElse(ResponseEntity.status(HttpStatus.UNAUTHORIZED).build());
     }
 
     @Operation(
