@@ -1,5 +1,8 @@
 package team3.kummit.domain;
 
+import java.time.LocalDateTime;
+
+import org.hibernate.annotations.CreationTimestamp;
 
 import jakarta.persistence.*;
 import lombok.*;
@@ -26,6 +29,7 @@ public class Comment {
     private String creatorName;
     private String comment;
 
-
+    @CreationTimestamp
+    private LocalDateTime createdAt;
 
 }
