@@ -16,8 +16,8 @@ public class MemberService {
         return memberRepository.findById(memberId).orElseThrow(()-> new IllegalArgumentException("Not existing Member id"));
     }
 
-    public Member findByEmail(String email){
-        return memberRepository.findByEmail(email);
+    public Member findByName(String name){
+        return memberRepository.findByName(name);
     }
 
 

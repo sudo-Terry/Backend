@@ -6,5 +6,5 @@ import team3.kummit.domain.Member;
 
 public interface MemberRepository extends JpaRepository<Member, Long> {
 
-    public Member findByEmail(String email);
+    public Member findByName(String name);
 }
