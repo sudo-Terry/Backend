@@ -15,6 +15,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import team3.kummit.domain.Member;
 import team3.kummit.dto.EmotionBandCreateRequest;
+import team3.kummit.dto.EmotionBandCreateResponse;
 import team3.kummit.dto.EmotionBandDetailResponse;
 import team3.kummit.dto.EmotionBandListResponse;
 import team3.kummit.service.EmotionBandService;
@@ -40,12 +41,12 @@ public class EmotionBandController {
         @ApiResponse(responseCode = "400", description = "잘못된 요청"),
         @ApiResponse(responseCode = "500", description = "서버 오류")
     })
-    public ResponseEntity<Long> createEmotionBand(
+    public ResponseEntity<EmotionBandCreateResponse> createEmotionBand(
             @Parameter(description = "사용자 ID (선택사항)") @RequestParam(required = false) Long memberId,
             @RequestBody EmotionBandCreateRequest emotionBandCreateRequest) {
         Member member = memberService.findById(memberId);
         Long emotionBandId = emotionBandService.createEmotionBand(member, emotionBandCreateRequest);
-        return ResponseEntity.status(HttpStatus.CREATED).body(emotionBandId);
+        return ResponseEntity.status(HttpStatus.CREATED).body(new EmotionBandCreateResponse(emotionBandId));
     }
 
     @Operation(summary = "감정밴드 목록 조회", description = "인기 밴드(좋아요 수 기준 상위 3개)와 전체 밴드(최신순 상위 10개)를 조회합니다")
