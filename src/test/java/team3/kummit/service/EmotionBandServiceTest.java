@@ -67,7 +67,7 @@ class EmotionBandServiceTest {
                 .build();
         // Act
         memberRepository.save(creator);
-        Long resultId = emotionBandService.createEmotionBand(creator, request);
+        Long resultId = emotionBandService.createEmotionBand(1L, request);
 
         // Assert
         assertNotNull(resultId);

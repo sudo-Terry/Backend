@@ -44,8 +44,7 @@ public class EmotionBandController {
     public ResponseEntity<EmotionBandCreateResponse> createEmotionBand(
             @Parameter(description = "사용자 ID (선택사항)") @RequestParam(required = false) Long memberId,
             @RequestBody EmotionBandCreateRequest emotionBandCreateRequest) {
-        Member member = memberService.findById(memberId);
-        Long emotionBandId = emotionBandService.createEmotionBand(member, emotionBandCreateRequest);
+        Long emotionBandId = emotionBandService.createEmotionBand(memberId, emotionBandCreateRequest);
         return ResponseEntity.status(HttpStatus.CREATED).body(new EmotionBandCreateResponse(emotionBandId));
     }
 

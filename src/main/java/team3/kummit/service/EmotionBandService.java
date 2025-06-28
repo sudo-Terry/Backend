@@ -23,9 +23,11 @@ public class EmotionBandService {
     private final EmotionBandLikeService emotionBandLikeService;
     private final CommentService commentService;
     private final SongRepository songRepository;
+    private final MemberService memberService;
 
     @Transactional
-    public Long createEmotionBand(Member member, EmotionBandCreateRequest emotionBandCreateRequest) {
+    public Long createEmotionBand(Long memberId, EmotionBandCreateRequest emotionBandCreateRequest) {
+        Member member = memberService.findById(memberId);
         EmotionBand emotionBand = emotionBandRepository.save(EmotionBand.builder()
                 .creator(member)
                 .creatorName(member.getName())
@@ -46,6 +48,8 @@ public class EmotionBandService {
                 .previewLink(emotionBandCreateRequest.getSong().getPreviewLink())
                 .createdAt(LocalDateTime.now())
                 .build());
+        member.incrementBandCreateCount();
+        member.incrementSongAddCount();
         return emotionBand.getId();
     }
 
