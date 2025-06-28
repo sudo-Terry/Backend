@@ -64,7 +64,11 @@ public class EmotionBandService {
                 .limit(3) // 최대 3개만
                 .map(band -> {
                     boolean isLiked = memberId != null && emotionBandLikeService.isLiked(band.getId(), memberId);
-                    return EmotionBandResponse.from(band, isLiked);
+                    List<SongResponse> songs = songRepository.findByEmotionBandIdOrderByCreatedAtDesc(band.getId())
+                            .stream()
+                            .map(SongResponse::from)
+                            .collect(Collectors.toList());
+                    return EmotionBandResponse.from(band, isLiked, songs);
                 })
                 .collect(Collectors.toList());
 
@@ -74,7 +78,11 @@ public class EmotionBandService {
                 .limit(10) // 최대 10개만
                 .map(band -> {
                     boolean isLiked = memberId != null && emotionBandLikeService.isLiked(band.getId(), memberId);
-                    return EmotionBandResponse.from(band, isLiked);
+                    List<SongResponse> songs = songRepository.findByEmotionBandIdOrderByCreatedAtDesc(band.getId())
+                            .stream()
+                            .map(SongResponse::from)
+                            .collect(Collectors.toList());
+                    return EmotionBandResponse.from(band, isLiked, songs);
                 })
                 .collect(Collectors.toList());
 
@@ -90,7 +98,11 @@ public class EmotionBandService {
                 .orElseThrow(() -> new ResourceNotFoundException("감정밴드를 찾을 수 없습니다."));
 
         boolean isLiked = memberId != null && emotionBandLikeService.isLiked(emotionBandId, memberId);
-        return EmotionBandResponse.from(band, isLiked);
+        List<SongResponse> songs = songRepository.findByEmotionBandIdOrderByCreatedAtDesc(emotionBandId)
+                .stream()
+                .map(SongResponse::from)
+                .collect(Collectors.toList());
+        return EmotionBandResponse.from(band, isLiked, songs);
     }
 
     @Transactional(readOnly = true)
