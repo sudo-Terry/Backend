@@ -1,4 +1,4 @@
-service-url: ${DEPLOY_ENDPOINT}
+service-url: http://144.24.81.195:8080
 
 logging:
   level:
