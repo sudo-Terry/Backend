@@ -26,8 +26,9 @@ public class EmotionBandDetailResponse {
     private List<SongResponse> songs;
     private List<CommentResponse> comments;
     private boolean isArchived;
+    private boolean liked;
 
-    public static EmotionBandDetailResponse from(EmotionBand emotionBand, List<SongResponse> songs, List<CommentResponse> comments, boolean isArchived) {
+    public static EmotionBandDetailResponse from(EmotionBand emotionBand, List<SongResponse> songs, List<CommentResponse> comments, boolean isArchived, boolean liked) {
         return EmotionBandDetailResponse.builder()
                 .id(emotionBand.getId())
                 .creatorName(emotionBand.getCreatorName())
@@ -41,6 +42,7 @@ public class EmotionBandDetailResponse {
                 .songs(songs)
                 .comments(comments)
                 .isArchived(isArchived)
+                .liked(liked)
                 .build();
     }
 }

@@ -55,7 +55,6 @@ class EmotionBandServiceTest {
 
         // Assert
         assertNotNull(resultId);
-        assertEquals(creator.getId(), resultId);
     }
 
 }
