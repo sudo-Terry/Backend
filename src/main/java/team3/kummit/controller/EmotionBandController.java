@@ -32,7 +32,7 @@ public class EmotionBandController {
     @PostMapping()
     @Operation(
         summary = "새 감정밴드 생성",
-        description = "새로운 감정밴드를 생성합니다. 사용자 ID는 선택사항입니다.",
+        description = "새로운 감정밴드를 생성합니다. 사용자 ID는 필수입니다.",
         tags = {"EmotionBand"}
     )
     @ApiResponses(value = {
