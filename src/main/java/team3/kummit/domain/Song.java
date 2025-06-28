@@ -1,5 +1,8 @@
 package team3.kummit.domain;
 
+import java.time.LocalDateTime;
+
+import org.hibernate.annotations.CreationTimestamp;
 
 import jakarta.persistence.*;
 import lombok.*;
@@ -29,5 +32,8 @@ public class Song {
     private String artist;
     private String albumImageLink;
     private String previewLink;
+
+    @CreationTimestamp
+    private LocalDateTime createdAt;
 
 }
