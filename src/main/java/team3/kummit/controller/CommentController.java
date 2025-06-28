@@ -1,5 +1,6 @@
 package team3.kummit.controller;
 
+import java.util.List;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -38,5 +39,18 @@ public class CommentController {
             @RequestBody CommentRequest request) {
         CommentResponse response = commentService.createComment(emotionBandId, memberId, request);
         return ResponseEntity.ok(response);
+    }
+
+    @Operation(summary = "댓글 목록 조회", description = "감정밴드의 모든 댓글을 조회합니다")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "성공", content = @Content(mediaType = "application/json")),
+            @ApiResponse(responseCode = "404", description = "감정밴드를 찾을 수 없음"),
+            @ApiResponse(responseCode = "500", description = "서버 오류")
+    })
+    @GetMapping
+    public ResponseEntity<List<CommentResponse>> getComments(
+            @Parameter(description = "감정밴드 ID") @PathVariable Long emotionBandId) {
+        List<CommentResponse> comments = commentService.getComments(emotionBandId);
+        return ResponseEntity.ok(comments);
     }
 }
