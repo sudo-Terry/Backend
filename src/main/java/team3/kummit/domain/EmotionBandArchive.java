@@ -1,5 +1,9 @@
 package team3.kummit.domain;
 
+import java.time.LocalDateTime;
+
+import org.hibernate.annotations.CreationTimestamp;
+
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -21,4 +25,7 @@ public class EmotionBandArchive {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="emotion_band_id")
     private EmotionBand emotionBand;
+
+    @CreationTimestamp
+    private LocalDateTime createdAt;
 }

@@ -23,6 +23,7 @@ import team3.kummit.repository.SongRepository;
 public class EmotionBandService {
     private final EmotionBandRepository emotionBandRepository;
     private final EmotionBandLikeService emotionBandLikeService;
+    private final EmotionBandArchiveService emotionBandArchiveService;
     private final CommentService commentService;
     private final SongRepository songRepository;
 
@@ -66,7 +67,7 @@ public class EmotionBandService {
     }
 
     @Transactional(readOnly = true)
-    public EmotionBandDetailResponse getEmotionBandDetail(Long emotionBandId) {
+    public EmotionBandDetailResponse getEmotionBandDetail(Long emotionBandId, Long memberId) {
         // 감정밴드 조회
         EmotionBand emotionBand = emotionBandRepository.findById(emotionBandId)
                 .orElseThrow(() -> new ResourceNotFoundException("감정밴드를 찾을 수 없습니다."));
@@ -80,6 +81,9 @@ public class EmotionBandService {
         // 댓글 목록 조회
         List<CommentResponse> comments = commentService.getComments(emotionBandId);
 
-        return EmotionBandDetailResponse.from(emotionBand, songs, comments);
+        // 보관 여부 확인
+        boolean isArchived = memberId != null && emotionBandArchiveService.isArchived(emotionBandId, memberId);
+
+        return EmotionBandDetailResponse.from(emotionBand, songs, comments, isArchived);
     }
 }
