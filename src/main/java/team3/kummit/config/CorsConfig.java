@@ -9,17 +9,13 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @Configuration
 public class CorsConfig {
 
-    @Value("${service-url}")
-    private String serviceURL;
-
-
     @Bean
     public WebMvcConfigurer corsConfigurer() { //개발 cors
         return new WebMvcConfigurer() {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
                 registry.addMapping("/**")
-                        .allowedOrigins(serviceURL)
+                        .allowedOrigins("http://144.24.81.195:8080")
                         .allowedMethods("GET", "POST", "PUT", "OPTIONS", "DELETE", "PATCH", "HEAD")
                         .allowCredentials(true)
                         .allowedHeaders("*");
