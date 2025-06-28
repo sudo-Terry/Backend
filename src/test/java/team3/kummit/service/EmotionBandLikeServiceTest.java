@@ -88,12 +88,15 @@ class EmotionBandLikeServiceTest {
                 .thenReturn(testLike);
         when(bandRepository.save(any(EmotionBand.class)))
                 .thenReturn(testEmotionBand.toBuilder().likeCount(6).build());
+        when(memberRepository.save(any(Member.class)))
+                .thenReturn(testMember.toBuilder().likeCount(11).build());
 
         boolean result = emotionBandLikeService.toggleLike(emotionBandId, memberId);
 
         assertThat(result).isTrue();
         verify(likeRepository).save(any(EmotionBandLike.class));
         verify(bandRepository).save(any(EmotionBand.class));
+        verify(memberRepository).save(any(Member.class));
     }
 
     @Test
@@ -110,12 +113,15 @@ class EmotionBandLikeServiceTest {
                 .thenReturn(Optional.of(testLike));
         when(bandRepository.save(any(EmotionBand.class)))
                 .thenReturn(testEmotionBand.toBuilder().likeCount(4).build());
+        when(memberRepository.save(any(Member.class)))
+                .thenReturn(testMember.toBuilder().likeCount(9).build());
 
         boolean result = emotionBandLikeService.toggleLike(emotionBandId, memberId);
 
         assertThat(result).isFalse();
         verify(likeRepository).delete(testLike);
         verify(bandRepository).save(any(EmotionBand.class));
+        verify(memberRepository).save(any(Member.class));
     }
 
     @Test

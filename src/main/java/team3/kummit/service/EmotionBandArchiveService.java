@@ -37,6 +37,21 @@ public class EmotionBandArchiveService {
             // 보관 해제 toggle
             archiveRepository.findByCreatorIdAndEmotionBandId(memberId, emotionBandId)
                     .ifPresent(archiveRepository::delete);
+
+            // peopleCount 감소, bandJoinCount 감소
+            Integer currentPeopleCount = emotionBand.getPeopleCount() != null ? emotionBand.getPeopleCount() : 0;
+            Integer currentBandJoinCount = member.getBandJoinCount() != null ? member.getBandJoinCount() : 0;
+
+            EmotionBand updatedEmotionBand = emotionBand.toBuilder()
+                    .peopleCount(Math.max(0, currentPeopleCount - 1))
+                    .build();
+            Member updatedMember = member.toBuilder()
+                    .bandJoinCount(Math.max(0, currentBandJoinCount - 1))
+                    .build();
+
+            emotionBandRepository.save(updatedEmotionBand);
+            memberRepository.save(updatedMember);
+
             return EmotionBandArchiveResponse.of(false, "보관이 해제되었습니다.");
         } else {
             // 보관 추가 toggle
@@ -45,6 +60,21 @@ public class EmotionBandArchiveService {
                     .emotionBand(emotionBand)
                     .build();
             archiveRepository.save(archive);
+
+            // peopleCount 증가, bandJoinCount 증가
+            Integer currentPeopleCount = emotionBand.getPeopleCount() != null ? emotionBand.getPeopleCount() : 0;
+            Integer currentBandJoinCount = member.getBandJoinCount() != null ? member.getBandJoinCount() : 0;
+
+            EmotionBand updatedEmotionBand = emotionBand.toBuilder()
+                    .peopleCount(currentPeopleCount + 1)
+                    .build();
+            Member updatedMember = member.toBuilder()
+                    .bandJoinCount(currentBandJoinCount + 1)
+                    .build();
+
+            emotionBandRepository.save(updatedEmotionBand);
+            memberRepository.save(updatedMember);
+
             return EmotionBandArchiveResponse.of(true, "보관되었습니다.");
         }
     }

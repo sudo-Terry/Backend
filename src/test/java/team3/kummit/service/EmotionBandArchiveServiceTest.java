@@ -88,6 +88,10 @@ class EmotionBandArchiveServiceTest {
                 .thenReturn(false);
         when(archiveRepository.save(any(EmotionBandArchive.class)))
                 .thenReturn(testArchive);
+        when(emotionBandRepository.save(any(EmotionBand.class)))
+                .thenReturn(testEmotionBand.toBuilder().peopleCount(1).build());
+        when(memberRepository.save(any(Member.class)))
+                .thenReturn(testMember.toBuilder().bandJoinCount(1).build());
 
         // when
         EmotionBandArchiveResponse result = emotionBandArchiveService.toggleArchive(emotionBandId, memberId);
@@ -97,6 +101,8 @@ class EmotionBandArchiveServiceTest {
         assertThat(result.isArchived()).isTrue();
         assertThat(result.getMessage()).isEqualTo("보관되었습니다.");
         verify(archiveRepository).save(any(EmotionBandArchive.class));
+        verify(emotionBandRepository).save(any(EmotionBand.class));
+        verify(memberRepository).save(any(Member.class));
     }
 
     @Test
@@ -114,6 +120,10 @@ class EmotionBandArchiveServiceTest {
                 .thenReturn(true);
         when(archiveRepository.findByCreatorIdAndEmotionBandId(memberId, emotionBandId))
                 .thenReturn(java.util.Optional.of(testArchive));
+        when(emotionBandRepository.save(any(EmotionBand.class)))
+                .thenReturn(testEmotionBand.toBuilder().peopleCount(0).build());
+        when(memberRepository.save(any(Member.class)))
+                .thenReturn(testMember.toBuilder().bandJoinCount(0).build());
 
         // when
         EmotionBandArchiveResponse result = emotionBandArchiveService.toggleArchive(emotionBandId, memberId);
@@ -123,6 +133,8 @@ class EmotionBandArchiveServiceTest {
         assertThat(result.isArchived()).isFalse();
         assertThat(result.getMessage()).isEqualTo("보관이 해제되었습니다.");
         verify(archiveRepository).delete(testArchive);
+        verify(emotionBandRepository).save(any(EmotionBand.class));
+        verify(memberRepository).save(any(Member.class));
     }
 
     @Test

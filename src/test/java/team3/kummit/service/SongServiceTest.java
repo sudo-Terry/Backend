@@ -101,6 +101,8 @@ class SongServiceTest {
                 .thenReturn(savedSong);
         when(emotionBandRepository.save(any(EmotionBand.class)))
                 .thenReturn(testEmotionBand.toBuilder().songCount(1).build());
+        when(memberRepository.save(any(Member.class)))
+                .thenReturn(testMember.toBuilder().songAddCount(1).build());
 
         SongResponse result = songService.addSong(emotionBandId, memberId, testSongRequest);
 
@@ -112,6 +114,7 @@ class SongServiceTest {
         assertThat(result.getEmotion()).isEqualTo("기쁨");
 
         verify(emotionBandRepository).save(any(EmotionBand.class));
+        verify(memberRepository).save(any(Member.class));
     }
 
     @Test
