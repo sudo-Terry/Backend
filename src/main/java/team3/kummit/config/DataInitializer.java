@@ -41,7 +41,7 @@ public class DataInitializer {
 
             // 멤버 더미 데이터 생성
             Member member1 = Member.builder()
-                    .name("김철수")
+                    .name("박태희")
                     .email("kim@test.com")
                     .password("password123")
                     .signUpDate(LocalDate.now().minusDays(30))
@@ -52,7 +52,7 @@ public class DataInitializer {
                     .build();
 
             Member member2 = Member.builder()
-                    .name("이영희")
+                    .name("소일전")
                     .email("lee@test.com")
                     .password("password456")
                     .signUpDate(LocalDate.now().minusDays(20))

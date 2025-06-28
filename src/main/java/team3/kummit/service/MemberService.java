@@ -16,4 +16,9 @@ public class MemberService {
         return memberRepository.findById(memberId).orElseThrow(()-> new IllegalArgumentException("Not existing Member id"));
     }
 
+    public Member findByName(String name){
+        return memberRepository.findByName(name);
+    }
+
+
 }
