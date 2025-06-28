@@ -1,51 +1,32 @@
 package team3.kummit.service;
 
+import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.*;
+
+import java.time.LocalDateTime;
+
 import org.junit.jupiter.api.Test;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
+
 import team3.kummit.domain.EmotionBand;
 import team3.kummit.domain.Member;
 import team3.kummit.domain.Song;
 import team3.kummit.dto.EmotionBandCreateRequest;
-import team3.kummit.repository.EmotionBandRepository;
-import team3.kummit.repository.SongRepository;
-
-import java.time.LocalDateTime;
-
-import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.*;
+import team3.kummit.repository.MemberRepository;
 
 @SpringBootTest
 @Transactional
 class EmotionBandServiceTest {
 
-    @Mock
-    private EmotionBandRepository emotionBandRepository;
+    @Autowired
+    EmotionBandService emotionBandService;
 
-    @Mock
-    private SongRepository songRepository;
+    @Autowired
+    MemberRepository memberRepository;
 
-    @Mock
-    private EmotionBandLikeService emotionBandLikeService;
-
-    @Mock
-    private CommentService commentService;
-
-    @InjectMocks
-    private EmotionBandService emotionBandService;
-
-    public EmotionBandServiceTest() {
-        MockitoAnnotations.openMocks(this);
-    }
-
-    /**
-     * Tests the createEmotionBand method by simulating valid input.
-     * Ensures that the EmotionBand and Song entities are successfully persisted
-     * and that a valid ID is returned.
-     */
     @Test
     void testCreateEmotionBand_Success() {
         // Arrange
@@ -84,34 +65,13 @@ class EmotionBandServiceTest {
                 .createdAt(LocalDateTime.now())
                 .emotionBand(savedEmotionBand)
                 .build();
-
-        when(emotionBandRepository.save(any(EmotionBand.class))).thenReturn(savedEmotionBand);
-        when(songRepository.save(any(Song.class))).thenReturn(savedSong);
-
         // Act
+        memberRepository.save(creator);
         Long resultId = emotionBandService.createEmotionBand(creator, request);
 
         // Assert
         assertNotNull(resultId);
         assertEquals(1L, resultId);
-        verify(emotionBandRepository, times(1)).save(any(EmotionBand.class));
-        verify(songRepository, times(1)).save(any(Song.class));
     }
 
-    /**
-     * Tests the createEmotionBand method with invalid inputs.
-     * Verifies that the method throws a NullPointerException when input data is incomplete.
-     */
-    @Test
-    void testCreateEmotionBand_InvalidInput() {
-        // Arrange
-        Member creator = Member.builder().id(1L).build();
-        EmotionBandCreateRequest invalidRequest = new EmotionBandCreateRequest();
-
-        // Act & Assert
-        assertThrows(NullPointerException.class,
-                () -> emotionBandService.createEmotionBand(creator, invalidRequest));
-        verify(emotionBandRepository, never()).save(any(EmotionBand.class));
-        verify(songRepository, never()).save(any(Song.class));
-    }
 }

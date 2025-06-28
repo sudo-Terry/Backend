@@ -9,11 +9,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import lombok.RequiredArgsConstructor;
 import team3.kummit.domain.EmotionBand;
-import team3.kummit.dto.CommentResponse;
-import team3.kummit.dto.EmotionBandDetailResponse;
-import team3.kummit.dto.EmotionBandListResponse;
-import team3.kummit.dto.EmotionBandResponse;
-import team3.kummit.dto.SongResponse;
+import team3.kummit.domain.Member;
+import team3.kummit.domain.Song;
+import team3.kummit.dto.*;
 import team3.kummit.exception.ResourceNotFoundException;
 import team3.kummit.repository.EmotionBandRepository;
 import team3.kummit.repository.SongRepository;
@@ -25,6 +23,31 @@ public class EmotionBandService {
     private final EmotionBandLikeService emotionBandLikeService;
     private final CommentService commentService;
     private final SongRepository songRepository;
+
+    @Transactional
+    public Long createEmotionBand(Member member, EmotionBandCreateRequest emotionBandCreateRequest) {
+        EmotionBand emotionBand = emotionBandRepository.save(EmotionBand.builder()
+                .creator(member)
+                .creatorName(member.getName())
+                .emotion(emotionBandCreateRequest.getEmotion())
+                .description(emotionBandCreateRequest.getDescription())
+                .endTime(LocalDateTime.now().plusDays(1))
+                .likeCount(0)
+                .peopleCount(0)
+                .songCount(1)
+                .commentCount(0).build());
+        Song song = songRepository.save(Song.builder()
+                .creator(member)
+                .emotionBand(emotionBand)
+                .creatorName(member.getName())
+                .title(emotionBandCreateRequest.getSong().getTitle())
+                .artist(emotionBandCreateRequest.getSong().getArtist())
+                .albumImageLink(emotionBandCreateRequest.getSong().getAlbumImageLink())
+                .previewLink(emotionBandCreateRequest.getSong().getPreviewLink())
+                .createdAt(LocalDateTime.now())
+                .build());
+        return emotionBand.getId();
+    }
 
     @Transactional(readOnly = true)
     public EmotionBandListResponse getEmotionBandLists(Long memberId) {
