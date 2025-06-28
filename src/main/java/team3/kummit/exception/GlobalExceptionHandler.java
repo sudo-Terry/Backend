@@ -1,10 +1,13 @@
 package team3.kummit.exception;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
+
+@Slf4j
 @RestControllerAdvice
 public class GlobalExceptionHandler {
 
@@ -15,6 +18,7 @@ public class GlobalExceptionHandler {
                 "잘못된 요청",
                 e.getMessage()
         );
+        log.error(e.getMessage(), e);
         return ResponseEntity.badRequest().body(errorResponse);
     }
 
@@ -25,6 +29,7 @@ public class GlobalExceptionHandler {
                 "리소스를 찾을 수 없음",
                 e.getMessage()
         );
+        log.error(e.getMessage(), e);
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorResponse);
     }
 
@@ -35,6 +40,7 @@ public class GlobalExceptionHandler {
                 "서버 오류",
                 "내부 서버 오류가 발생했습니다."
         );
+        log.error(e.getMessage(), e);
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(errorResponse);
     }
 
