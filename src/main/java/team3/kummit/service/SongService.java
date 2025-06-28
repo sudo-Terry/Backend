@@ -57,6 +57,13 @@ public class SongService {
                 .build();
         emotionBandRepository.save(updatedEmotionBand);
 
+        // 사용자의 음악 추가 수 증가
+        Integer currentSongAddCount = member.getSongAddCount() != null ? member.getSongAddCount() : 0;
+        Member updatedMember = member.toBuilder()
+                .songAddCount(currentSongAddCount + 1)
+                .build();
+        memberRepository.save(updatedMember);
+
         return SongResponse.from(savedSong);
     }
 }
