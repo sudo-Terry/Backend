@@ -1,6 +1,8 @@
 package team3.kummit.service;
 
 import java.time.LocalDateTime;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -48,4 +50,13 @@ public class CommentService {
         Comment savedComment = commentRepository.save(comment);
         return CommentResponse.from(savedComment);
     }
+
+    @Transactional(readOnly = true)
+    public List<CommentResponse> getComments(Long emotionBandId) {
+        List<Comment> comments = commentRepository.findByEmotionBandIdOrderByCreatedAtDesc(emotionBandId);
+        return comments.stream()
+                .map(CommentResponse::from)
+                .collect(Collectors.toList());
+    }
+
 }
