@@ -14,7 +14,7 @@ public class CorsConfig {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
                 registry.addMapping("/**")
-                        .allowedOrigins("http://144.24.81.195:8080", "http://localhost:5173", "https://kummit-frontend-git-main-qkrxogmlas-projects.vercel.app/")
+                        .allowedOrigins("http://144.24.81.195:8080", "http://144.24.81.195:80", "http://localhost:5173")
                         .allowedMethods("GET", "POST", "PUT", "OPTIONS", "DELETE", "PATCH", "HEAD")
                         .allowCredentials(true)
                         .allowedHeaders("*");
