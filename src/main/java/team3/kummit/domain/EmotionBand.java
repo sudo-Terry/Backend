@@ -9,7 +9,7 @@ import lombok.*;
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-@Builder
+@Builder(toBuilder = true)
 @AllArgsConstructor
 public class EmotionBand {
 
@@ -29,6 +29,6 @@ public class EmotionBand {
     private Integer likeCount;
     private Integer peopleCount;
     private Integer songCount;
-
+    private Integer commentCount;
 
 }

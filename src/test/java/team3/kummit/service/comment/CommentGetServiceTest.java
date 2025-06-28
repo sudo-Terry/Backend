@@ -1,4 +1,4 @@
-package team3.kummit.service;
+package team3.kummit.service.comment;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.when;
@@ -22,9 +22,10 @@ import team3.kummit.dto.CommentResponse;
 import team3.kummit.repository.CommentRepository;
 import team3.kummit.repository.EmotionBandRepository;
 import team3.kummit.repository.MemberRepository;
+import team3.kummit.service.CommentService;
 
 @ExtendWith(MockitoExtension.class)
-class CommentServiceTest {
+class CommentGetServiceTest {
 
     @Mock
     private CommentRepository commentRepository;
@@ -56,7 +57,7 @@ class CommentServiceTest {
                 .creator(testMember)
                 .creatorName("테스트유저")
                 .emotion("기쁨")
-                .comment("테스트 감정밴드")
+                .description("테스트 감정밴드")
                 .build();
 
         testComment1 = Comment.builder()

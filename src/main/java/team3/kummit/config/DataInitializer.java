@@ -85,6 +85,7 @@ public class DataInitializer {
                     .likeCount(5)
                     .peopleCount(3)
                     .songCount(2)
+                    .commentCount(3)
                     .build();
 
             EmotionBand band2 = EmotionBand.builder()
@@ -96,6 +97,7 @@ public class DataInitializer {
                     .likeCount(3)
                     .peopleCount(2)
                     .songCount(1)
+                    .commentCount(2)
                     .build();
 
             EmotionBand band3 = EmotionBand.builder()
@@ -107,6 +109,7 @@ public class DataInitializer {
                     .likeCount(2)
                     .peopleCount(1)
                     .songCount(0)
+                    .commentCount(0)
                     .build();
 
             EmotionBand band4 = EmotionBand.builder()
@@ -118,6 +121,7 @@ public class DataInitializer {
                     .likeCount(8)
                     .peopleCount(4)
                     .songCount(3)
+                    .commentCount(2)
                     .build();
 
             EmotionBand band5 = EmotionBand.builder()
@@ -129,6 +133,7 @@ public class DataInitializer {
                     .likeCount(999)
                     .peopleCount(99)
                     .songCount(10)
+                    .commentCount(0)
                     .build();
 
             emotionBandRepository.saveAll(Arrays.asList(band1, band2, band3, band4, band5));

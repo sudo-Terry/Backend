@@ -48,6 +48,14 @@ public class CommentService {
                 .build();
 
         Comment savedComment = commentRepository.save(comment);
+
+        // 감정밴드의 댓글 수 증가
+        Integer currentCommentCount = emotionBand.getCommentCount() != null ? emotionBand.getCommentCount() : 0;
+        EmotionBand updatedEmotionBand = emotionBand.toBuilder()
+                .commentCount(currentCommentCount + 1)
+                .build();
+        emotionBandRepository.save(updatedEmotionBand);
+
         return CommentResponse.from(savedComment);
     }
 
