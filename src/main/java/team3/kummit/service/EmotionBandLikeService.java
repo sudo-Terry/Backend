@@ -1,5 +1,7 @@
 package team3.kummit.service;
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -91,5 +93,9 @@ public class EmotionBandLikeService {
     @Transactional(readOnly = true)
     public boolean isLiked(Long emotionBandId, Long memberId) {
         return likeRepository.findByCreatorIdAndEmotionBandId(memberId, emotionBandId).isPresent();
+    }
+
+    public List<Long> findEmotionBandListByMemberId(Long memberId) {
+        return bandRepository.findEmotionBandIdListByCreator(memberId);
     }
 }

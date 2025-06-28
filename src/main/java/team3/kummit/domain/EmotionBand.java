@@ -2,6 +2,8 @@ package team3.kummit.domain;
 
 
 import java.time.LocalDateTime;
+import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 import jakarta.persistence.*;
 import lombok.*;
@@ -30,5 +32,10 @@ public class EmotionBand {
     private Integer peopleCount;
     private Integer songCount;
     private Integer commentCount;
+
+    @OneToMany(mappedBy = "emotionBand", cascade = CascadeType.REMOVE, orphanRemoval = true)
+    private List<Song> songs = new CopyOnWriteArrayList<>();
+
+
 
 }

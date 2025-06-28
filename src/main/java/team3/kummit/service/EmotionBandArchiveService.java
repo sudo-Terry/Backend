@@ -1,5 +1,7 @@
 package team3.kummit.service;
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -82,5 +84,9 @@ public class EmotionBandArchiveService {
     @Transactional(readOnly = true)
     public boolean isArchived(Long emotionBandId, Long memberId) {
         return archiveRepository.existsByCreatorIdAndEmotionBandId(memberId, emotionBandId);
+    }
+
+    public List<Long> findEmotionBandIdListByCreator(Long memberId){
+        return archiveRepository.findEmotionBandIdListByCreator(memberId);
     }
 }
