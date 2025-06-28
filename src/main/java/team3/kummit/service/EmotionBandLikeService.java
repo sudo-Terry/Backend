@@ -10,6 +10,8 @@ import team3.kummit.repository.EmotionBandLikeRepository;
 import team3.kummit.repository.EmotionBandRepository;
 import team3.kummit.repository.MemberRepository;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class EmotionBandLikeService {
@@ -91,5 +93,9 @@ public class EmotionBandLikeService {
     @Transactional(readOnly = true)
     public boolean isLiked(Long emotionBandId, Long memberId) {
         return likeRepository.findByCreatorIdAndEmotionBandId(memberId, emotionBandId).isPresent();
+    }
+
+    public List<Long> findEmotionBandListByMemberId(Long memberId) {
+        return bandRepository.findEmotionBandIdListByCreator(memberId);
     }
 }

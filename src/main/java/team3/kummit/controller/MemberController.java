@@ -19,6 +19,8 @@ import lombok.extern.slf4j.Slf4j;
 import team3.kummit.domain.EmotionBand;
 import team3.kummit.domain.Member;
 import team3.kummit.dto.*;
+import team3.kummit.service.EmotionBandArchiveService;
+import team3.kummit.service.EmotionBandLikeService;
 import team3.kummit.service.EmotionBandService;
 import team3.kummit.service.MemberService;
 
@@ -32,6 +34,8 @@ public class MemberController {
 
     private final MemberService memberService;
     private final EmotionBandService emotionBandService;
+    private final EmotionBandLikeService emotionBandLikeService;
+    private final EmotionBandArchiveService emotionBandArchiveService;
 
 
     @Operation(
@@ -97,6 +101,46 @@ public class MemberController {
         return ResponseEntity.ok(new MemberBandResponse(collect));
     }
 
+    @Operation(
+            summary = "사용자가 공감한 감정 밴드 목록 조회",
+            description = "사용자의 ID를 전달받아, 해당 사용자가 공감한 감정 밴드 목록을 조회합니다. 조회된 감정 밴드의 상세 정보가 포함됩니다.",
+            parameters = {
+                    @Parameter(name = "memberId", description = "사용자 ID (선택사항)", required = false)
+            }
+    )
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "조회 성공"),
+            @ApiResponse(responseCode = "404", description = "조회에 필요한 감정 밴드를 찾을 수 없음")
+    })
+    @GetMapping("/like-band")
+    public ResponseEntity<MemberBandResponse> memberLikeBand(
+            @Parameter(description = "사용자 ID") @RequestParam Long memberId) {
+        List<Long> bandIdListOfMember = emotionBandLikeService.findEmotionBandListByMemberId(memberId);
+        List<EmotionBand> allByEmotionBandIdList = emotionBandService.findAllByEmotionBandIdList(bandIdListOfMember);
+        List<MemberBandResponseDto> collect = allByEmotionBandIdList.stream().map(this::toDto).collect(Collectors.toList());
+        return ResponseEntity.ok(new MemberBandResponse(collect));
+    }
+
+
+    @Operation(
+            summary = "사용자가 저장한 감정 밴드 목록 조회",
+            description = "사용자의 ID를 전달받아, 해당 사용자가 저장한 감정 밴드 목록을 조회합니다. 조회된 감정 밴드의 상세 정보가 포함됩니다.",
+            parameters = {
+                    @Parameter(name = "memberId", description = "사용자 ID (선택사항)", required = false)
+            }
+    )
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "조회 성공"),
+            @ApiResponse(responseCode = "404", description = "조회에 필요한 감정 밴드를 찾을 수 없음")
+    })
+    @GetMapping("/archive-band")
+    public ResponseEntity<MemberBandResponse> memberArchiveBand(
+            @Parameter(description = "사용자 ID") @RequestParam Long memberId) {
+        List<Long> bandIdListOfMember = emotionBandArchiveService.findEmotionBandIdListByCreator(memberId);
+        List<EmotionBand> allByEmotionBandIdList = emotionBandService.findAllByEmotionBandIdList(bandIdListOfMember);
+        List<MemberBandResponseDto> collect = allByEmotionBandIdList.stream().map(this::toDto).collect(Collectors.toList());
+        return ResponseEntity.ok(new MemberBandResponse(collect));
+    }
 
 
     private MemberBandResponseDto toDto(EmotionBand band) {

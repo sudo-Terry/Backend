@@ -13,6 +13,8 @@ import team3.kummit.repository.EmotionBandArchiveRepository;
 import team3.kummit.repository.EmotionBandRepository;
 import team3.kummit.repository.MemberRepository;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class EmotionBandArchiveService {
@@ -82,5 +84,9 @@ public class EmotionBandArchiveService {
     @Transactional(readOnly = true)
     public boolean isArchived(Long emotionBandId, Long memberId) {
         return archiveRepository.existsByCreatorIdAndEmotionBandId(memberId, emotionBandId);
+    }
+
+    public List<Long> findEmotionBandIdListByCreator(Long memberId){
+        return archiveRepository.findEmotionBandIdListByCreator(memberId);
     }
 }
