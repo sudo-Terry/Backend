@@ -13,17 +13,24 @@ import team3.kummit.domain.Member;
 import team3.kummit.dto.CommentRequest;
 import team3.kummit.dto.CommentResponse;
 import team3.kummit.repository.CommentRepository;
+import team3.kummit.repository.EmotionBandRepository;
+import team3.kummit.repository.MemberRepository;
 
 @Service
 @RequiredArgsConstructor
 public class CommentService {
     private final CommentRepository commentRepository;
+    private final EmotionBandRepository emotionBandRepository;
+    private final MemberRepository memberRepository;
     private final EntityValidator entityValidator;
 
     @Transactional
     public CommentResponse createComment(Long emotionBandId, Long memberId, CommentRequest request) {
-        EmotionBand emotionBand = entityValidator.validateActiveEmotionBand(emotionBandId);
-        Member member = entityValidator.validateMember(memberId);
+        EmotionBand emotionBand = emotionBandRepository.findById(emotionBandId).orElse(null);
+        Member member = memberRepository.findById(memberId).orElse(null);
+
+        entityValidator.validateActiveEmotionBand(emotionBand);
+        entityValidator.validateMember(member);
 
         Comment comment = Comment.builder()
                 .emotionBand(emotionBand)
@@ -35,6 +42,7 @@ public class CommentService {
         Comment savedComment = commentRepository.save(comment);
 
         emotionBand.incrementCommentCount();
+        emotionBandRepository.save(emotionBand);
 
         return CommentResponse.from(savedComment);
     }
